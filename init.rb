@@ -1,11 +1,11 @@
-# Redmine empty plugin
+# Redmine customer plugin
 require 'redmine'
 
-RAILS_DEFAULT_LOGGER.info 'Starting EMPTY plugin for RedMine'
+RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'
 
-Redmine::Plugin.register :empty do
-  name 'Empty plugin'
-  author 'Author name'
-  description 'This is an empty plugin for Redmine'
-  version '0.0.0'
+Redmine::Plugin.register :customer do
+  name 'Customer plugin'
+  author 'Eric Davis'
+  description 'This is a plugin for Redmine that can be used to track basic customer information'
+  version '0.1.0'
 end
