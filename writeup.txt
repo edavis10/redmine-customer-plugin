@@ -1,0 +1,219 @@
+* Copy the sample plugin
+* Clear out files
+
+.
+|-- README
+|-- app
+|   |-- controllers
+|   |-- models
+|   `-- views
+|       `-- settings
+|-- assets
+|   |-- images
+|   `-- stylesheets
+|-- db
+|   `-- migrate
+|-- init.rb
+`-- lang
+
+* Configure your basic init file
+
+<pre>
+# Redmine customer plugin
+require 'redmine'
+
+RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'
+
+Redmine::Plugin.register :customer do
+  name 'Customer plugin'
+  author 'Eric Davis'
+  description 'This is a plugin for Redmine that can be used to track basic customer information'
+  version '0.1.0'
+end
+</pre>
+
+* Build your migration
+* Migrate your database `rake db:migrate_plugins`
+* Build a very basic Model so we can connect to the database
+
+<pre>
+class Customer < ActiveRecord::Base
+end
+</pre>
+
+* Lets try the console and see if we can create a few customers
+
+<pre>
+$ script/console
+Loading development environment (Rails 2.0.2)
+GLoc v1.1 running in development mode. Strings can be modified at runtime.
+>> Customer.create({:name => 'Eric Davis', :company => 'Little Stream Software', :address => 'Beaverton, OR', :phone => '888.499.2510', :website => 'http://www.littlestreamsoftware.com'})
+=> #<Customer id: 2, name: "Eric Davis", company: "Little Stream Software", address: "Beaverton, OR", phone: "888.499.2510", email: nil, website: "http://www.littlestreamsoftware.com">
+>> Customer.create({:name => 'Linux Torvalds', :company => 'Linux Foundation', :address => 'Portland, OR'})
+=> #<Customer id: 3, name: "Linux Torvalds", company: "Linux Foundation", address: "Portland, OR", phone: nil, email: nil, website: nil>
+>> exit
+</pre>
+
+* Lets hook up a controller to see who is assigned to a project.  Index would work best
+
+<pre>
+class CustomersController < ApplicationController
+  unloadable
+  layout 'base'
+  before_filter :find_project, :authorize
+
+  def index
+  end
+
+  private
+  def find_project
+    @project=Project.find(params[:id])
+  end
+end
+</pre>
+
+* Need to add it to the Redmine init file now
+
+<pre>
+# Redmine customer plugin
+require 'redmine'
+
+RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'
+
+Redmine::Plugin.register :customer do
+  name 'Customer plugin'
+  author 'Eric Davis'
+  description 'This is a plugin for Redmine that can be used to track basic customer information'
+  version '0.1.0'
+  
+  project_module :customer_module do
+    permission :index, {:customers => [:index]}, :public => true
+  end
+
+  menu :project_menu, "Customer", :controller => 'customers', :action => 'index'
+end
+</pre>
+
+* Now we need a view file to render
+  mkdir app/views/customers
+
+<pre>
+#app/views/customers/index.html.erb 
+<h1>Customer</h1>
+
+</pre>
+
+* Opps, we are missing the FKs from customers to projects.  Since we can't modify the Project's file, we can only setup a HABTM relationship from one side.
+
+<pre>
+# Use rake db:migrate_plugins to migrate installed plugins
+class LinkCustomersToProjects < ActiveRecord::Migration
+  def self.up
+    add_column :projects, :customer_id, :integer    
+  end
+
+  def self.down
+    remove_column :projects, :customer_id
+  end
+end
+</pre>
+
+<pre>
+class Customer < ActiveRecord::Base
+  has_many :projects
+end
+</pre>
+
+* Migrate again to add the column
+* Lets assign the customer to my project by hand.  My customer id is 2
+
+>> p = Project.find(16)
+=> #<Project id: 16, name: "LSS - Business Time Tracking", description: "Business of running Little Stream,  used to track t...", homepage: "", is_public: false, parent_id: nil, projects_count: 0, created_on: "2007-10-05 09:42:10", updated_on: "2007-10-10 20:13:22", identifier: "littlestream", status: 1, customer_id: nil>
+>> p.customer_id = 2
+=> 2
+>> p.save
+=> true
+
+* Lets display it on our page now
+
+<pre>
+class CustomersController < ApplicationController
+  unloadable
+  layout 'base'
+  before_filter :find_project, :authorize
+
+  def index
+    @customer = Customer.find_by_id(@project.customer_id)
+  end
+
+  private
+  def find_project
+    @project=Project.find(params[:id])
+  end
+end
+</pre>
+
+<pre>
+<h1>Customer</h1>
+
+<p> Name: <%= h @customer.name %> </p>
+<p> Company: <%= h @customer.company %> </p>
+<p> Address: <%= h @customer.address %> </p>
+<p> Phone: <%= h @customer.phone %> </p>
+<p> Website: <%= h @customer.website %> </p>
+
+</pre>
+(((redmine_customer_1.png)))
+
+* It would be nice to be able to reassign the customer
+<pre>
+init.rb
+    permission :edit, {:customers => [:edit]}, :public => true
+</pre>
+
+<pre>
+  def edit
+    case request.method
+    when :post
+      # Will fill out later
+    when :get
+      @customer = Customer.find_by_id(@project.customer_id)
+    end
+  end
+</pre>
+
+<pre>
+<h3>Editing Customer</h3>
+
+<% form_for :customer, :url =>{:action => 'edit', :id => @project} do |f|  %>
+
+<p>
+  <label for="customer">Customer</label><br />
+  <%= collection_select(:customer, :id, Customer.find(:all), :id, :name) -%>
+</p>
+
+<%= submit_tag "Save" -%>
+
+<% end # form -%>
+
+</pre>
+
+* Now to hook up the reassignments
+
+<pre>
+  def edit
+    case request.method
+    when :post
+      @project.customer_id = params[:customer][:id]
+      if @project.save
+        flash[:notice] = "Saved"
+        redirect_to :action => "index", :id => params[:id]
+      else
+        flash[:notice] = "Could not save"
+      end
+    when :get
+      @customer = Customer.find_by_id(@project.customer_id)
+    end
+  end
+</pre>
+
