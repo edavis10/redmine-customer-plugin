@@ -1,0 +1,7 @@
+<p>
+  <strong>Menu:</strong>
+  <%= link_to_if_authorized "View", :controller => 'customers', :action => 'index', :id => @project -%>
+  <%= link_to_if_authorized "Assign", :controller => 'customers', :action => 'edit', :id => @project -%>
+  <%= link_to_if_authorized "List", :controller => 'customers', :action => 'list', :id => @project -%>
+  <%= link_to_if_authorized "New", :action => 'edit_info', :id => @project %>
+</p>
