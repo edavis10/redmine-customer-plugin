@@ -217,3 +217,111 @@ init.rb
   end
 </pre>
 
+* Add the ability to list and edit customer information itself
+
+  project_module :customer_module do
+    permission :index, {:customers => [:index]}, :public => true
+    permission :edit, {:customers => [:edit]}, :public => true
+    permission :list, {:customers => [:list]}, :public => true
+    permission :edit_info, {:customers => [:edit_info]}, :public => true
+  end
+
+<p><%= link_to "Edit", :controller => 'customers', :action => 'edit', :id => @project -%></p>
+<p><%= link_to "List", :controller => 'customers', :action => 'list', :id => @project -%></p>
+
+
+  def list
+    @customers = Customer.find(:all)
+  end
+
+<h1>Customer List</h1>
+
+<ul>
+<% @customers.each do |customer| -%>
+<li><%= link_to customer.name, 'edit_info', :id => @project, :customer_id => customer.id -%> from <%= h customer.company -%></li>
+<% end -%>
+</ul>
+
+* Editing a customer record
+
+  def edit_info
+    case request.method
+    when :post
+      # Will add later
+    when :get
+      @customer = Customer.find_by_id(params[:customer_id])
+    end
+  end
+
+<h3>Editing Customer Information</h3>
+
+<% form_for :customer, :url =>{:action => 'edit_info', :id => @project} do |f|  %>
+
+<%= f.hidden_field 'id' -%>
+
+<p>
+  <label for="customer_name">Name</label><br />
+  <%= f.text_field 'name' -%>
+</p>
+<p>
+  <label for="customer_company">Company</label><br />
+  <%= f.text_field 'company' -%>
+</p>
+<p>
+  <label for="customer_address">Address</label><br />
+  <%= f.text_area 'address' -%>
+</p>
+<p>
+  <label for="customer_phone">Phone</label><br />
+  <%= f.text_field 'phone' -%>
+</p>
+<p>
+  <label for="customer_email">Email</label><br />
+  <%= f.text_field 'email' -%>
+</p>
+<p>
+  <label for="customer_website">Website</label><br />
+  <%= f.text_field 'website' -%>
+</p>
+
+             
+<%= submit_tag "Save" -%>
+
+<% end # form -%>
+
+* Saving an edited customer record
+
+  def edit_info
+    case request.method
+    when :post
+      @customer = Customer.find_by_id(params[:customer][:id])
+      if @customer.nil?
+        # New record
+        @customer = Customer.new(params[:customer])
+      end
+      if @customer.update_attributes(params[:customer])
+        flash[:notice] = "Saved"
+        redirect_to :action => "list", :id => params[:id]
+      else
+        flash[:notice] = "Could not save"
+      end
+
+    when :get
+      @customer = Customer.find_by_id(params[:customer_id])
+    end
+  end
+
+* Adding a new customer
+
+<%= link_to "New Customer", :action => 'edit_info', :id => @project %>
+
+* Security
+
+  project_module :customer_module do
+    permission :view_customer, {:customers => [:index]}
+    permission :assign_customer, {:customers => [:edit]}
+    permission :see_customer_list, {:customers => [:list]}
+    permission :edit_customer, {:customers => [:edit_info]}
+  end
+
+link_to_if_authorized

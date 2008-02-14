@@ -10,8 +10,10 @@ Redmine::Plugin.register :customer do
   version '0.1.0'
   
   project_module :customer_module do
-    permission :index, {:customers => [:index]}, :public => true
-    permission :edit, {:customers => [:edit]}, :public => true
+    permission :view_customer, {:customers => [:index]}
+    permission :assign_customer, {:customers => [:edit]}
+    permission :see_customer_list, {:customers => [:list]}
+    permission :edit_customer, {:customers => [:edit_info]}
   end
 
   menu :project_menu, "Customer", :controller => 'customers', :action => 'index'

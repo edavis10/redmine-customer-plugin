@@ -6,11 +6,14 @@ class CustomersController < ApplicationController
   def index
     @customer = Customer.find_by_id(@project.customer_id)
   end
+  
+  def list
+    @customers = Customer.find(:all)
+  end
 
   def edit
     case request.method
     when :post
-      # Will fill out later
       @project.customer_id = params[:customer][:id]
       if @project.save
         flash[:notice] = "Saved"
@@ -20,6 +23,26 @@ class CustomersController < ApplicationController
       end
     when :get
       @customer = Customer.find_by_id(@project.customer_id)
+    end
+  end
+
+  def edit_info
+    case request.method
+    when :post
+      @customer = Customer.find_by_id(params[:customer][:id])
+      if @customer.nil?
+        # New record
+        @customer = Customer.new(params[:customer])
+      end
+      if @customer.update_attributes(params[:customer])
+        flash[:notice] = "Saved"
+        redirect_to :action => "list", :id => params[:id]
+      else
+        flash[:notice] = "Could not save"
+      end
+
+    when :get
+      @customer = Customer.find_by_id(params[:customer_id])
     end
   end
   

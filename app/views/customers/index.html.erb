@@ -6,4 +6,6 @@
 <p> Phone: <%= h @customer.phone %> </p>
 <p> Website: <%= h @customer.website %> </p>
 
-<p><%= link_to "Edit", :controller => 'customers', :action => 'edit', :id => @project -%></p>
+<p><%= link_to_if_authorized "Edit", :controller => 'customers', :action => 'edit', :id => @project -%></p>
+<p><%= link_to_if_authorized "List", :controller => 'customers', :action => 'list', :id => @project -%></p>
+

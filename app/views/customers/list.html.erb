@@ -1,0 +1,9 @@
+<h1>Customer List</h1>
+
+<ul>
+<% @customers.each do |customer| -%>
+<li><%= link_to customer.name, :action => 'edit_info', :id => @project, :customer_id => customer.id -%> from <%= h customer.company -%></li>
+<% end -%>
+</ul>
+
+<%= link_to_if_authorized "New Customer", :action => 'edit_info', :id => @project %>
