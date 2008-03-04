@@ -1,9 +1,13 @@
 <h1>Customer</h1>
 
+<% if @customer -%>
 <p> Name: <%= h @customer.name %> </p>
 <p> Company: <%= h @customer.company %> </p>
 <p> Address: <%= h @customer.address %> </p>
 <p> Phone: <%= h @customer.phone %> </p>
 <p> Website: <%= h @customer.website %> </p>
 
+<% else %>
+<p> No customer assigned</p>
+<% end %>
 <%= render(:partial => 'menu') %>
