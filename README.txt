@@ -10,11 +10,19 @@ This is a plugin for Redmine that can be used to track basic customer informatio
 
 ## Install
 
-1. Follow the Redmine plugin installation steps at: http://www.redmine.org/wiki/redmine/Plugins  Make sure to install Engines 2 if you use Rails 2.0.
-2. Login to your Redmine install as an Administrator
-3. Setup the permissions for your roles
-4. Add the "Customer module" to the enabled modules for your project
-5. The link to the plugin should appear on that project's navigation as Customer
+1. Download the archive file and extract it to your `vendor/plugins` folder.  You can also download directly from GitHub using git:
+
+         git clone git://github.com/edavis10/redmine-customer-plugin.git vendor/plugins/customer_plugin
+
+2. Follow the Redmine plugin installation steps at: http://www.redmine.org/wiki/redmine/Plugins  Make sure to install Engines 2 if you use Rails 2.0.
+3. Setup the database using the migrations.
+
+         rake db:migrate_plugins
+
+4. Login to your Redmine install as an Administrator
+5. Setup the permissions for your roles
+6. Add the "Customer module" to the enabled modules for your project
+7. The link to the plugin should appear on that project's navigation as Customer
 
 ## Usage
 
