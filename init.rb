@@ -3,7 +3,7 @@ require 'redmine'
 
 RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'
 
-Redmine::Plugin.register :customer do
+Redmine::Plugin.register :customer_plugin do
   name 'Customer plugin'
   author 'Eric Davis'
   description 'This is a plugin for Redmine that can be used to track basic customer information'
@@ -16,5 +16,5 @@ Redmine::Plugin.register :customer do
     permission :edit_customer, {:customers => [:edit_info]}
   end
 
-  menu :project_menu, "Customer", :controller => 'customers', :action => 'index'
+  menu :project_menu, :customers, {:controller => 'customers', :action => 'index'}, :caption => :customer_title
 end
