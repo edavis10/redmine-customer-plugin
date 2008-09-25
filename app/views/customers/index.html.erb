@@ -1,13 +1,15 @@
-<h1>Customer</h1>
+<h2><%= l(:label_customer_information) %></h2>
 
 <% if @customer -%>
-<p> Name: <%= h @customer.name %> </p>
-<p> Company: <%= h @customer.company %> </p>
-<p> Address: <%= h @customer.address %> </p>
-<p> Phone: <%= h @customer.phone %> </p>
-<p> Website: <%= h @customer.website %> </p>
-
+  <div class="box">
+    <p> <%= l(:field_customer_name) %>: <%= h @customer.name %> </p>
+    <p> <%= l(:field_customer_company) %>: <%= h @customer.company %> </p>
+    <p> <%= l(:field_customer_address) %>: <%= h @customer.address %> </p>
+    <p> <%= l(:field_customer_phone) %>: <%= h @customer.phone %> </p>
+    <p> <%= l(:field_customer_email) %>: <%= h @customer.email %> </p>
+    <p> <%= l(:field_customer_website) %>: <%= h @customer.website %> </p>
+  </div>
 <% else %>
-<p> No customer assigned</p>
+  <p class="nodata"><%=l(:label_no_data)%></p>
 <% end %>
 <%= render(:partial => 'menu') %>

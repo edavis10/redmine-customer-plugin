@@ -16,10 +16,10 @@ class CustomersController < ApplicationController
     when :post
       @project.customer_id = params[:customer][:id]
       if @project.save
-        flash[:notice] = "Saved"
+        flash[:notice] = l(:notice_successful_save)
         redirect_to :action => "index", :id => params[:id]
       else
-        flash[:notice] = "Could not save"
+        flash[:error] = l(:notice_unsuccessful_save)
       end
     when :get
       @customer = Customer.find_by_id(@project.customer_id)
@@ -35,10 +35,10 @@ class CustomersController < ApplicationController
         @customer = Customer.new(params[:customer])
       end
       if @customer.update_attributes(params[:customer])
-        flash[:notice] = "Saved"
+        flash[:notice] = l(:notice_successful_save)
         redirect_to :action => "list", :id => params[:id]
       else
-        flash[:notice] = "Could not save"
+        flash[:error] = l(:notice_unsuccessful_save)
       end
 
     when :get

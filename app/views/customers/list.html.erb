@@ -1,9 +1,13 @@
-<h1>Customer List</h1>
+<h1><%= l(:label_customer_plural) %></h1>
 
-<ul>
-<% @customers.each do |customer| -%>
-<li><%= link_to customer.name, :action => 'edit_info', :id => @project, :customer_id => customer.id -%> from <%= h customer.company -%></li>
-<% end -%>
+<% unless @customers.empty? %>
+  <ul>
+  <% @customers.each do |customer| -%>
+    <li><%= link_to customer.name, :action => 'edit_info', :id => @project, :customer_id => customer.id -%> from <%= h customer.company -%></li>
+  <% end %>
+<% else %>
+  <p class="nodata"><%=l(:label_no_data)%></p>
+<% end %>
 </ul>
 
 <%= render(:partial => 'menu') %>

@@ -1,13 +1,13 @@
-<h3>Editing Customer</h3>
+<h2><%= l(:label_customer_assign_to_project) %></h2>
 
 <% form_for :customer, :url =>{:action => 'edit', :id => @project} do |f|  %>
 
 <p>
-  <label for="customer">Customer</label><br />
-  <%= collection_select(:customer, :id, Customer.find(:all), :id, :name) -%>
+  <label for="customer"><%= l(:label_customer) %></label><br />
+  <%= collection_select(:customer, :id, Customer.find(:all), :id, :pretty_name) -%>
 </p>
 
-<%= submit_tag "Save" -%>
+<%= submit_tag l(:button_save) -%>
 
 <% end # form -%>
 
