@@ -4,7 +4,7 @@ label_customer: Cliente
 label_customer_plural: Elenco clienti
 label_customer_information: Dettaglio cliente
 label_customer_edit_information: Modifica dettaglio cliente
-label_customer_assign_to_project: Assign Customer to Project
+label_customer_assign_to_project: Assegna cliente al progetto
 label_customer_view: Mostra dettaglio
 label_customer_assign: Assegna
 label_customer_list: Elenco clienti
