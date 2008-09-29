@@ -8,7 +8,6 @@ label_customer_view: Mostra dettaglio
 label_customer_assign: Assegna
 label_customer_list: Elenco clienti
 label_customer_new: Nuovo cliente
-label_customer_from: di
 field_customer_name: Nominativo
 field_customer_company: Azienda
 field_customer_address: Indirizzo
