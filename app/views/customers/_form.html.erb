@@ -1,0 +1,22 @@
+<%= error_messages_for 'customer' %>
+
+<div class="box"> 
+  <p>
+    <%= f.text_field 'name', :label=>'field_customer_name' -%>
+  </p>
+  <p>
+    <%= f.text_field 'company', :label=>'field_customer_company' -%>
+  </p>
+  <p>
+    <%= f.text_area 'address', :label=>'field_customer_address', :rows => 5 -%>
+  </p>
+  <p>
+    <%= f.text_field 'phone', :label=>'field_customer_phone' -%>
+  </p>
+  <p>
+    <%= f.text_field 'email', :label=>'field_customer_email' -%>
+  </p>
+  <p>
+    <%= f.text_field 'website', :label=>'field_customer_website' -%>
+  </p>
+</div>

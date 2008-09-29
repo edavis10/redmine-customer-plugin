@@ -1,0 +1,22 @@
+<div class="contextual">
+  <%= link_to_if_authorized l(:button_edit), {:controller => 'customers', :action => 'edit', :id => @project, :customer_id => @customer.id}, :class => 'icon icon-edit' unless @customer.nil? %>
+  <%= link_to_if_authorized l(:label_customer_view), {:controller => 'customers', :action => 'show', :id => @project}, :class => 'icon icon-user' %>
+  <%= link_to_if_authorized l(:label_customer_assign), {:controller => 'customers', :action => 'select', :id => @project}, :class => 'icon icon-move' %>
+  <%= link_to_if_authorized l(:label_customer_list), {:controller => 'customers', :action => 'list', :id => @project}, :class => 'icon icon-users' %>
+  <%= link_to_if_authorized l(:label_customer_new), {:controller => 'customers', :action => 'new', :id => @project}, :class => 'icon icon-add' %>
+</div>
+
+<h2><%= l(:label_customer) %></h2>
+
+<% unless @customer.nil? -%>
+  <div class="box">
+    <p> <%= l(:field_customer_name) %>: <%= h @customer.name %> </p>
+    <p> <%= l(:field_customer_company) %>: <%= h @customer.company %> </p>
+    <p> <%= l(:field_customer_address) %>: <%= h @customer.address %> </p>
+    <p> <%= l(:field_customer_phone) %>: <%= h @customer.phone %> </p>
+    <p> <%= l(:field_customer_email) %>: <%= mail_to @customer.email unless @customer.email.blank? %> </p>
+    <p> <%= l(:field_customer_website) %>: <%= link_to @customer.website unless @customer.website.blank? %> </p>
+  </div>
+<% else %>
+  <p class="nodata"><%=l(:label_no_data)%></p>
+<% end %>
