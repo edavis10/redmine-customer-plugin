@@ -6,8 +6,10 @@ class Customer < ActiveRecord::Base
   validates_presence_of :company, :if => :name_unsetted
   
   def pretty_name
-    result = name || "[#{company}]" 
-    result << " [#{company}]" unless company.blank?
+    result = name.strip
+    result << " " unless result.blank?
+    result << "[#{company}]" unless company.blank?
+    result
   end
   
   private
