@@ -14,5 +14,6 @@ field_customer_address: Indirizzo
 field_customer_phone: Telefono
 field_customer_email: Email
 field_customer_website: Sito web
+field_customer_skype: Skype
 notice_successful_save: Salvato con successo
 notice_unsuccessful_save: Impossibile salvare

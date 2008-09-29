@@ -16,6 +16,7 @@
     <p> <%= l(:field_customer_phone) %>: <%= h @customer.phone %> </p>
     <p> <%= l(:field_customer_email) %>: <%= mail_to @customer.email unless @customer.email.blank? %> </p>
     <p> <%= l(:field_customer_website) %>: <%= link_to @customer.website unless @customer.website.blank? %> </p>
+    <p> <%= l(:field_customer_skype) %>: <%= @customer.skype_name unless @customer.skype_name.blank? %> </p>
   </div>
 <% else %>
   <p class="nodata"><%=l(:label_no_data)%></p>

@@ -9,6 +9,7 @@ class Customer < ActiveRecord::Base
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, 
     :allow_nil => true, :allow_blank => true
   #TODO validate website address
+  #TODO validate skype_name contact
   
   def pretty_name
     result = name.strip
