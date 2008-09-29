@@ -1,3 +1,10 @@
+<div class="contextual">
+<%= link_to_if_authorized l(:label_customer_view), {:controller => 'customers', :action => 'index', :id => @project}, :class => 'icon icon-user' %>
+<%= link_to_if_authorized l(:label_customer_assign), {:controller => 'customers', :action => 'edit', :id => @project.id}, :class => 'icon icon-move' %>
+<%= link_to_if_authorized l(:label_customer_list), {:controller => 'customers', :action => 'list', :id => @project.id}, :class => 'icon icon-users' %>
+<%= link_to_if_authorized l(:label_customer_new), {:controller => 'customers', :action => 'edit_info', :id => @project.id}, :class => 'icon icon-add' %>
+</div>
+
 <h3><%= l(:label_customer_edit_information) %></h3>
 
 <% form_for :customer, :url =>{:action => 'edit_info', :id => @project} do |f|  %>
@@ -33,6 +40,3 @@
 <%= submit_tag l(:button_save) -%>
 
 <% end # form -%>
-
-
-<%= render(:partial => 'menu') %>

@@ -1,3 +1,10 @@
+<div class="contextual">
+<%= link_to_if_authorized l(:label_customer_view), {:controller => 'customers', :action => 'index', :id => @project}, :class => 'icon icon-user' %>
+<%= link_to_if_authorized l(:label_customer_assign), {:controller => 'customers', :action => 'edit', :id => @project.id}, :class => 'icon icon-move' %>
+<%= link_to_if_authorized l(:label_customer_list), {:controller => 'customers', :action => 'list', :id => @project.id}, :class => 'disabled icon icon-users' %>
+<%= link_to_if_authorized l(:label_customer_new), {:controller => 'customers', :action => 'edit_info', :id => @project.id}, :class => 'icon icon-add' %>
+</div>
+
 <h1><%= l(:label_customer_plural) %></h1>
 
 <% unless @customers.empty? %>
@@ -9,5 +16,3 @@
   <p class="nodata"><%=l(:label_no_data)%></p>
 <% end %>
 </ul>
-
-<%= render(:partial => 'menu') %>

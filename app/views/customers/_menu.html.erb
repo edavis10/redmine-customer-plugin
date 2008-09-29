@@ -1,7 +1,0 @@
-<p>
-  <strong><%= l(:customer_menu) %></strong>
-  <%= link_to_if_authorized l(:label_customer_view), :controller => 'customers', :action => 'index', :id => @project -%>
-  <%= link_to_if_authorized l(:label_customer_assign), :controller => 'customers', :action => 'edit', :id => @project -%>
-  <%= link_to_if_authorized l(:label_customer_list), :controller => 'customers', :action => 'list', :id => @project -%>
-  <%= link_to_if_authorized l(:label_customer_new), :action => 'edit_info', :id => @project %>
-</p>
