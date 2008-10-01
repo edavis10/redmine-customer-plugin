@@ -5,4 +5,5 @@ Eric Davis <edavis[AT]littlestreamsoftware[DOT]com>
 
 Michele Franzin
 - added Italian translation
-- fixed menu highlight
+- UI fixes and improvements
+- refactorings
