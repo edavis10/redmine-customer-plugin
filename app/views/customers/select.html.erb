@@ -19,3 +19,9 @@
   <%= submit_tag l(:button_save) -%>
 
 <% end -%>
+
+<% content_for(:header_tags) do %>
+  <style type="text/css">
+    .icon-users { background-image: url(../../images/users.png); }
+  </style>
+<% end %>
