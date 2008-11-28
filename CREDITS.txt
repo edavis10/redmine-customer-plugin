@@ -7,3 +7,6 @@ Michele Franzin
 - added Italian translation
 - UI fixes and improvements
 - refactorings
+
+Pau Garcia i Quiles
+- Catalan translation
