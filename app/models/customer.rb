@@ -11,12 +11,13 @@ class Customer < ActiveRecord::Base
   #TODO validate website address
   #TODO validate skype_name contact
   
-  def pretty_name
-    result = name.strip
-    result << " " unless result.blank?
-    result << "[#{company}]" unless company.blank?
-    result
-  end
+   def pretty_name
+     result = ''
+     result << name.strip unless name.blank?
+     result << " " unless result.blank? || company.blank?
+     result << "[#{company}]" unless company.blank?
+     result
+   end
   
   private
   

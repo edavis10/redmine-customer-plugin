@@ -123,6 +123,28 @@ describe Customer do
 end
 
 describe Customer, '.pretty_name' do
-  it 'should return the name of the Customer'
-  it 'should add the company to the name if company is present'
+  it 'should return the name of the Customer' do
+    @customer = Customer.new( :name => 'John Customer')
+    @customer.pretty_name.should eql('John Customer')
+  end
+
+  it 'should add the company to the name if company is present' do
+    @customer = Customer.new( :name => 'John Customer', :company => 'ABC Company')
+    @customer.pretty_name.should match(/ABC Company/)
+  end
+  
+  it 'should return only the company name if name is missing' do
+    @customer = Customer.new( :company => 'ABC Company')
+    @customer.pretty_name.should match(/ABC Company/)
+  end
+  
+  it 'should enclose the company name in brackets' do
+    @customer = Customer.new( :company => 'ABC Company')
+    @customer.pretty_name.should match(/\[ABC Company\]/)
+  end
+
+  it 'should separate the customer name from the company name by a space if both are present' do
+    @customer = Customer.new( :name => 'John Customer', :company => 'ABC Company')
+    @customer.pretty_name.should eql("John Customer [ABC Company]")
+  end
 end
