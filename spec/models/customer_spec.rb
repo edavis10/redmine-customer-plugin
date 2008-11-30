@@ -138,13 +138,8 @@ describe Customer, '.pretty_name' do
     @customer.pretty_name.should match(/ABC Company/)
   end
   
-  it 'should enclose the company name in brackets' do
-    @customer = Customer.new( :company => 'ABC Company')
-    @customer.pretty_name.should match(/\[ABC Company\]/)
-  end
-
-  it 'should separate the customer name from the company name by a space if both are present' do
+  it 'should separate the customer name from the company name by a space and comma if both are present' do
     @customer = Customer.new( :name => 'John Customer', :company => 'ABC Company')
-    @customer.pretty_name.should eql("John Customer [ABC Company]")
+    @customer.pretty_name.should eql("John Customer, ABC Company")
   end
 end

@@ -12,11 +12,12 @@ class Customer < ActiveRecord::Base
   #TODO validate skype_name contact
   
    def pretty_name
-     result = ''
-     result << name.strip unless name.blank?
-     result << " " unless result.blank? || company.blank?
-     result << "[#{company}]" unless company.blank?
-     result
+     result = []
+     [self.name, self.company].each do |field|
+       result << field unless field.blank?
+     end
+     
+     return result.join(", ")
    end
   
   private
