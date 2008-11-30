@@ -39,20 +39,6 @@ describe Customer do
     @conflict_customer.errors.on(:name).should include("activerecord_error_taken")
   end
   
-  describe 'with a valid email' do
-    it 'should have a single @' do
-      @customer.attributes = { :name => 'John Customer', :company => "ABC Company"}
-      @customer.email = ""
-      @customer.should be_valid
-    end
-      
-
-    it 'should have at least one character before @'
-    it 'should have alphanumerics or hypens after for the domain'
-    it 'should allow subdomains'
-    it 'should have a TLD at least 2 characters long'
-  end
-  
   describe 'with an invalid email' do
     before(:each) do
       @customer.attributes = { :name => 'John Customer', :company => "ABC Company"}
