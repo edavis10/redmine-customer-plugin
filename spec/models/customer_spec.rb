@@ -114,7 +114,12 @@ describe Customer do
 end
 
 describe Customer do
-  it 'should have many projects'
+  it 'should have many projects' do
+    association = Customer.reflect_on_association(:projects)
+    association.should_not be_nil
+    association.name.should eql(:projects)
+    association.macro.should eql(:has_many)
+  end
 end
 
 describe Customer, '.pretty_name' do
