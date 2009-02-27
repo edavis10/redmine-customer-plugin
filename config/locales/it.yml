@@ -1,0 +1,25 @@
+it:
+  customer_title: Cliente
+  label_customer: Cliente
+  label_customer_plural: Elenco clienti
+  label_customer_information: Dettaglio cliente
+  label_customer_edit_information: Modifica dettaglio cliente
+  label_customer_assign_to_project: Assegna cliente al progetto
+  label_customer_view: Mostra dettaglio
+  label_customer_assign: Assegna
+  label_customer_list: Elenco clienti
+  label_customer_new: Nuovo cliente
+  field_customer_name: Nominativo
+  field_customer_company: Azienda
+  field_customer_address: Indirizzo
+  field_customer_phone: Telefono
+  field_customer_email: Email
+  field_customer_website: Sito web
+  field_customer_skype: Skype
+  notice_successful_save: Salvato con successo
+  notice_unsuccessful_save: Impossibile salvare
+  project_module_customer_module: Clienti
+  permission_view_customer: Vedi cliente
+  permission_assign_customer: Assegna cliente
+  permission_see_customer_list: Vedi lista clienti
+  permission_edit_customer: Modifica cliente

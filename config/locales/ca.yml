@@ -1,0 +1,20 @@
+ca:
+  customer_title: Clients
+  label_customer: Client
+  label_customer_plural: Llista de clients
+  label_customer_information: Informaci&oacute; de clients
+  label_customer_edit_information: Edita informaci&ocuate; de client
+  label_customer_assign_to_project: Assigna client a projecte
+  label_customer_view: Veure
+  label_customer_assign: Assigna
+  label_customer_list: Llista
+  label_customer_new: Nou
+  field_customer_name: Nom
+  field_customer_company: Empresa
+  field_customer_address: Addre&ccedil;a
+  field_customer_phone: Tel&egrave;fon
+  field_customer_email: Correu electr&ograve;nic
+  field_customer_website: P&agrave;gina web
+  field_customer_skype: Skype
+  notice_successful_save: Desat
+  notice_unsuccessful_save: No s'ha pogut desar
