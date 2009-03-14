@@ -1,0 +1,20 @@
+de:
+  customer_title: Kunde
+  label_customer: Kunde
+  label_customer_plural: Kundenliste
+  label_customer_information: Kundendetails
+  label_customer_edit_information: Kundendetails bearbeiten
+  label_customer_assign_to_project: Kunde zu Projekt zuordnen
+  label_customer_view: Anzeigen
+  label_customer_assign: Zuweisen
+  label_customer_list: Auflisten
+  label_customer_new: Neu
+  field_customer_name: Name
+  field_customer_company: Firma
+  field_customer_address: Adresse
+  field_customer_phone: Telefon
+  field_customer_email: Email
+  field_customer_website: Website
+  field_customer_skype: Skype
+  notice_successful_save: Gespeichert
+  notice_unsuccessful_save: Fehler beim Speichern
