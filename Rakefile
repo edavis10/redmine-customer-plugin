@@ -92,12 +92,12 @@ task :release => [:clean, :rdoc, 'release:zip', 'release:tarball']
 namespace :release do
   desc "Create a zip archive"
   task :zip => [:clean] do
-    sh "git archive --format=zip --prefix=#{PLUGIN_NAME}/ HEAD > #{PLUGIN_NAME}.zip"
+    sh "git archive --format=zip --prefix=#{PROJECT_NAME}/ HEAD > #{PROJECT_NAME}.zip"
   end
 
   desc "Create a tarball archive"
   task :tarball => [:clean] do
-    sh "git archive --format=tar --prefix=#{PLUGIN_NAME}/ HEAD | gzip > #{PLUGIN_NAME}.tar.gz"
+    sh "git archive --format=tar --prefix=#{PROJECT_NAME}/ HEAD | gzip > #{PROJECT_NAME}.tar.gz"
   end  
 end
 
