@@ -11,12 +11,12 @@ describe Customer do
   
   it 'should require a name if company is not set' do
     @customer.should_not be_valid
-    @customer.errors.on(:name).should include("activerecord_error_blank")
+    @customer.errors.on(:name).should_not be_empty
   end
 
   it 'should require a company if name is not set' do
     @customer.should_not be_valid
-    @customer.errors.on(:company).should include("activerecord_error_blank")
+    @customer.errors.on(:company).should_not be_empty
   end
   
   it 'should be valid if name is set but company is missing' do
@@ -29,14 +29,14 @@ describe Customer do
     @customer.should be_valid
   end
 
-  it '.name should be unique within a company' do
+  it '#name should be unique within a company' do
     @customer.name = 'John Customer'
     @customer.company = "ABC Company"
     @customer.save!
     
     @conflict_customer = Customer.new( :name => 'John Customer', :company => "ABC Company")
     @conflict_customer.should_not be_valid
-    @conflict_customer.errors.on(:name).should include("activerecord_error_taken")
+    @conflict_customer.errors.on(:name).should_not be_empty
   end
   
   describe 'with an invalid email' do
