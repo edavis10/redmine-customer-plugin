@@ -7,7 +7,11 @@ Redmine::Plugin.register :customer_plugin do
   name 'Customer plugin'
   author 'Eric Davis'
   description 'This is a plugin for Redmine that can be used to track basic customer information'
-  version '0.1.0'
+  version '0.2.0'
+
+  url 'https://projects.littlestreamsoftware.com/projects/redmine-customers' if respond_to? :url
+  author_url 'http://www.littlestreamsoftware.com' if respond_to? :author_url
+
   
   project_module :customer_module do
     permission :view_customer, {:customers => [:show]}
