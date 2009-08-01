@@ -13,7 +13,7 @@
     <label for="customer"><%= l(:label_customer) %></label>
     <p>
     <p>
-      <%= collection_select(:customer, :id, @customers, :id, :pretty_name) -%>
+      <%= collection_select(:customer, :id, @customers, :id, :pretty_name, :include_blank => true) -%>
     </p>
   </div>
   <%= submit_tag l(:button_save) -%>
