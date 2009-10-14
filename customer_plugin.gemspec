@@ -44,6 +44,7 @@ Gem::Specification.new do |s|
      "lang/es.yml",
      "lang/fr.yml",
      "lang/it.yml",
+     "lib/empty",
      "rails/init.rb"
   ]
   s.homepage = %q{https://projects.littlestreamsoftware.com/projects/TODO}
